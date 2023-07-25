@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {fetchAll} from "./AdminThunk";
+import {fetchAll, fetchOne} from "./AdminThunk";
 
 interface State {
   dishes: IDish[];
+  currentDish: TDishApi | null;
 }
 
 const initialState: State = {
-  dishes: []
+  dishes: [],
+  currentDish: null,
 }
 
 const adminSlice = createSlice({
@@ -16,6 +18,10 @@ const adminSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAll.fulfilled, (state, { payload: dishes }) => {
       state.dishes = dishes;
+    });
+
+    builder.addCase(fetchOne.fulfilled, (state, { payload: currentDish }) => {
+      state.currentDish = currentDish;
     });
   }
 });

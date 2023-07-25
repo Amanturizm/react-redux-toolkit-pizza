@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { adminReducer } from "../store/Admin/AdminSlice";
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    dishes: adminReducer
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

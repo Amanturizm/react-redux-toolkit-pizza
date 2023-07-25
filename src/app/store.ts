@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { adminReducer } from "../store/Admin/AdminSlice";
+import { clientSideReducer } from "../store/ClientSide/ClientSideSlice";
 
 export const store = configureStore({
   reducer: {
-    dishes: adminReducer
+    admin: adminReducer,
+    clientSide: clientSideReducer,
   }
 });
 

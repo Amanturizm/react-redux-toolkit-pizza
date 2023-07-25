@@ -12,9 +12,11 @@ const initialState: State = {
 }
 
 const adminSlice = createSlice({
-  name: 'dishes',
+  name: 'admin',
   initialState,
-  reducers: {},
+  reducers: {
+    clearCurrentDish: (state) => { state.currentDish = null },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAll.fulfilled, (state, { payload: dishes }) => {
       state.dishes = dishes;
@@ -27,3 +29,4 @@ const adminSlice = createSlice({
 });
 
 export const adminReducer = adminSlice.reducer;
+export const { clearCurrentDish } = adminSlice.actions;

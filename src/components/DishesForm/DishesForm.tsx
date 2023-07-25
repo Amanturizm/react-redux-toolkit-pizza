@@ -4,6 +4,7 @@ import CloseButton from "../CloseButton/CloseButton";
 import {useAppDispatch, useAppSelector} from "../../app/hook";
 import {createOne, editOne, fetchAll, fetchOne} from "../../store/Admin/AdminThunk";
 import {useNavigate, useParams} from "react-router-dom";
+import {clearCurrentDish} from "../../store/Admin/AdminSlice";
 
 const initialState: TDishApi = {
   title: '',
@@ -13,14 +14,21 @@ const initialState: TDishApi = {
 
 const DishesForm = () => {
   const dispatch = useAppDispatch();
-  const { currentDish } = useAppSelector(state => state.dishes);
+  const { currentDish } = useAppSelector(state => state.admin);
 
   const navigate = useNavigate();
   const { id } = useParams() as { id: string };
 
   const [inputsValue, setInputsValue] = useState<TDishApi>(initialState);
 
-  useEffect(() => { if (id) dispatch(fetchOne(id)) }, [id, dispatch]);
+  useEffect(() => {
+    if (id) dispatch(fetchOne(id)) ;
+
+    return () => {
+      dispatch(clearCurrentDish());
+    }
+  }, [id, dispatch]);
+
   useEffect(() => { if (currentDish) setInputsValue(currentDish) }, [currentDish]);
 
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {

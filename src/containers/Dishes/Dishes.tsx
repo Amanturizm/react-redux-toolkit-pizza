@@ -4,9 +4,16 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { fetchAll } from "../../store/Admin/AdminThunk";
 import Dish from "../../components/Dish/Dish";
 
-const Dishes = () => {
+interface Props {
+  isAdmin?: boolean;
+}
+
+const Dishes: React.FC<Props> = ({ isAdmin }) => {
   const dispatch = useAppDispatch();
-  const { dishes } = useAppSelector(state => state.dishes);
+  const { dishes } = useAppSelector(state => state.admin);
+  const { cartDishes } = useAppSelector(state => state.clientSide);
+
+  console.log(cartDishes);
 
   useEffect(() => {
     dispatch(fetchAll());
@@ -14,14 +21,19 @@ const Dishes = () => {
 
   return (
     <div className="mt-4">
-      <div className="d-flex align-items-center justify-content-between mb-3">
-        <h1>Dishes</h1>
-        <Link to="new-dish" className="btn btn-primary">Add new Dish</Link>
-      </div>
+      {
+        isAdmin ?
+          <div className="d-flex align-items-center justify-content-between mb-3">
+            <h1>Dishes</h1>
+            <Link to="new-dish" className="btn btn-primary">Add new Dish</Link>
+          </div>
+          : null
+      }
 
-      <div className="d-flex flex-column gap-4">
+
+      <div className={"d-flex gap-4 " + ( isAdmin ? "flex-column" : "flex-wrap justify-content-center" )}>
         {
-          dishes.map(dish => <Dish dish={dish} key={`dish-${dish.id}`} />)
+          dishes.map(dish => <Dish dish={dish} key={`dish-${dish.id}`} isAdmin={isAdmin} />)
         }
       </div>
 

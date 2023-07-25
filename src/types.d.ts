@@ -10,3 +10,8 @@ type TDishApi = Omit<IDish, 'id'>;
 interface IDishesApi {
   [id: string]: TDishApi;
 }
+
+interface ICartDish {
+  dish: IDish;
+  amount: number;
+}

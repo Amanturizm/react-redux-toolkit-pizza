@@ -1,17 +1,17 @@
 import React from 'react';
-import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import Dishes from "../Dishes/Dishes";
 
-const Admin = () => (
+const ClientSide = () => (
   <>
     <header>
-      <Navbar isAdmin />
+      <Navbar />
     </header>
 
     <main className="container-fluid" style={{ paddingTop: 56 }}>
-      <Outlet />
+      <Dishes />
     </main>
   </>
 );
 
-export default Admin;
+export default ClientSide;

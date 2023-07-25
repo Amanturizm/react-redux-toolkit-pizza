@@ -3,12 +3,20 @@ import {Link} from "react-router-dom";
 import DeleteConfirm from "../DeleteConfirm/DeleteConfirm";
 import {useAppDispatch} from "../../app/hook";
 import {deleteOne, fetchAll} from "../../store/Admin/AdminThunk";
+import {addDish} from "../../store/ClientSide/ClientSideSlice";
 
 interface Props {
   dish: IDish;
+  isAdmin?: boolean;
 }
 
-const Dish: React.FC<Props> = ({ dish }) => {
+const DISH_CLASSES = {
+  DEFAULT: 'd-flex align-items-center justify-content-between ',
+  ADMIN: 'border-top border-5 border-black pe-4 pt-4',
+  CLIENT_SIDE: 'border border-5 border-black rounded-4 p-4 pe-5',
+}
+
+const Dish: React.FC<Props> = ({ dish, isAdmin }) => {
   const dispatch = useAppDispatch();
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
 
@@ -17,17 +25,33 @@ const Dish: React.FC<Props> = ({ dish }) => {
     await dispatch(fetchAll());
   };
 
+  const setCart = () => {
+    dispatch(addDish(dish));
+  };
+
   return (
-    <div className="d-flex align-items-center justify-content-between border-top border-5 border-black pe-4 pt-4">
+    <div
+      className={DISH_CLASSES.DEFAULT + ( isAdmin ? DISH_CLASSES.ADMIN : DISH_CLASSES.CLIENT_SIDE )}
+      style={{ cursor: isAdmin ? 'default' : 'pointer', width: isAdmin ? '100%' : 700 }}
+      onClick={isAdmin ? () => {} : setCart}
+    >
       <div className="d-flex align-items-center gap-3">
         <img src={dish.image} alt="dish-img" className="rounded-4" style={{ width: 150, height: 150 }} />
-        <h1>{dish.title}</h1>
+        <h1 className="overflow-hidden" style={{ maxWidth: isAdmin ? 'none' : 250, textOverflow: 'ellipsis' }}>{dish.title}</h1>
       </div>
-      <div className="d-flex align-items-center gap-3">
+
+      <div className="d-flex align-items-center gap-3 ms-3">
         <h1>{dish.price} KGS</h1>
-        <Link to={`edit/${dish.id}`} className="btn btn-success">Edit</Link>
-        <button className="btn btn-danger" onClick={() => setIsConfirm(true)}>Delete</button>
+        {
+          isAdmin ?
+            <>
+              <Link to={`edit/${dish.id}`} className="btn btn-success">Edit</Link>
+              <button className="btn btn-danger" onClick={() => setIsConfirm(true)}>Delete</button>
+            </>
+            : null
+        }
       </div>
+
       { isConfirm ? <DeleteConfirm clickYes={deleteDish} clickNo={() => setIsConfirm(false)} /> : null }
     </div>
   );

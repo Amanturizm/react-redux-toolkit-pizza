@@ -5,10 +5,13 @@ import Admin from "./containers/Admin/Admin";
 import Dishes from "./containers/Dishes/Dishes";
 import DishesForm from "./components/DishesForm/DishesForm";
 import NotFound from "./components/NotFound/NotFound";
+import Checkout from "./components/Checkout/Checkout";
 
 const App = () => (
   <Routes>
-    <Route path="/" element={<ClientSide />} />
+    <Route path="/" element={<ClientSide />}>
+      <Route path="checkout" element={<Checkout />}/>
+    </Route>
 
     <Route path="/admin" element={<Admin />}>
       <Route path="dishes" element={<Dishes isAdmin />}>

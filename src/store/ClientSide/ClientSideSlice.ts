@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface State {
-  cartDishes: ICartDish | null;
+  cartDishes: ICartDishes | null;
 }
 
 const initialState: State = {
@@ -22,6 +22,17 @@ const clientSideSlice = createSlice({
       } else if (type === 'remove') {
         delete state.cartDishes[id];
       }
+    },
+    increaseDish: (state, { payload: id }: PayloadAction<string>) => {
+      if (state.cartDishes) {
+        state.cartDishes[id] = state.cartDishes[id] + 1;
+      }
+    },
+    decreaseDish: (state, { payload: id }: PayloadAction<string>) => {
+      if (state.cartDishes) {
+        if (state.cartDishes[id] === 0) return;
+        state.cartDishes[id] = state.cartDishes[id] - 1;
+      }
     }
   },
   extraReducers: (builder) => {
@@ -30,4 +41,4 @@ const clientSideSlice = createSlice({
 });
 
 export const clientSideReducer = clientSideSlice.reducer;
-export const { addOrRemoveDish } = clientSideSlice.actions;
+export const { addOrRemoveDish, increaseDish, decreaseDish } = clientSideSlice.actions;

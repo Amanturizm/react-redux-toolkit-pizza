@@ -11,9 +11,6 @@ interface Props {
 const Dishes: React.FC<Props> = ({ isAdmin }) => {
   const dispatch = useAppDispatch();
   const { dishes } = useAppSelector(state => state.admin);
-  const { cartDishes } = useAppSelector(state => state.clientSide);
-
-  console.log(cartDishes);
 
   useEffect(() => {
     dispatch(fetchAll());
@@ -31,7 +28,7 @@ const Dishes: React.FC<Props> = ({ isAdmin }) => {
       }
 
 
-      <div className={"d-flex gap-4 " + ( isAdmin ? "flex-column" : "flex-wrap justify-content-center" )}>
+      <div className={"d-flex gap-4 " + ( isAdmin ? "flex-column" : "flex-wrap ms-5" )}>
         {
           dishes.map(dish => <Dish dish={dish} key={`dish-${dish.id}`} isAdmin={isAdmin} />)
         }

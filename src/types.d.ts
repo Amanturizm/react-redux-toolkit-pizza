@@ -12,6 +12,10 @@ interface IDishesApi {
 }
 
 interface ICartDish {
-  dish: IDish;
-  amount: number;
+  [id: string]: number;
 }
+
+// interface ICartDish {
+//   dish: IDish;
+//   amount: number;
+// }

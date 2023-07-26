@@ -1,0 +1,12 @@
+.amountButton:active {
+  animation: buttonScaling .3s linear;
+}
+
+@keyframes buttonScaling {
+  0%,100% {
+    scale: 1;
+  }
+  50% {
+    scale: .8;
+  }
+}

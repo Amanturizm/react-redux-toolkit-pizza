@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import DeleteConfirm from "../DeleteConfirm/DeleteConfirm";
-import {useAppDispatch} from "../../app/hook";
+import {useAppDispatch, useAppSelector} from "../../app/hook";
 import {deleteOne, fetchAll} from "../../store/Admin/AdminThunk";
 import { addOrRemoveDish} from "../../store/ClientSide/ClientSideSlice";
 
@@ -18,8 +18,11 @@ const DISH_CLASSES = {
 
 const Dish: React.FC<Props> = ({ dish, isAdmin }) => {
   const dispatch = useAppDispatch();
-  const [isConfirm, setIsConfirm] = useState<boolean>(false);
-  const [isSelect, setIsSelect] = useState<boolean>(false);
+  const { cartDishes } = useAppSelector(state => state.clientSide);
+
+  const [isConfirm, setIsConfirm] = useState<boolean>(false); // for admin
+
+  const isSelect: boolean = Boolean(cartDishes && cartDishes[dish.id]);
 
   const deleteDish = async () => {
     await dispatch(deleteOne(dish.id));
@@ -28,7 +31,6 @@ const Dish: React.FC<Props> = ({ dish, isAdmin }) => {
 
   const setCart = () => {
     dispatch(addOrRemoveDish({ type: isSelect ? 'remove' : 'add', id: dish.id }));
-    setIsSelect(!isSelect);
   };
 
   return (

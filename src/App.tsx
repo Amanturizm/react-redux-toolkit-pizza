@@ -6,11 +6,13 @@ import Dishes from "./containers/Dishes/Dishes";
 import DishesForm from "./components/DishesForm/DishesForm";
 import NotFound from "./components/NotFound/NotFound";
 import Checkout from "./components/Checkout/Checkout";
+import OrderResult from "./components/OrderResult/OrderResult";
 
 const App = () => (
   <Routes>
     <Route path="/" element={<ClientSide />}>
-      <Route path="checkout" element={<Checkout />}/>
+      <Route path="checkout" element={<Checkout />} />
+      <Route path="order-result" element={<OrderResult />} />
     </Route>
 
     <Route path="/admin" element={<Admin />}>

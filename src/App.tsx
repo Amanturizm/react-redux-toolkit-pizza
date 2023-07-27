@@ -7,6 +7,7 @@ import DishesForm from "./components/DishesForm/DishesForm";
 import NotFound from "./components/NotFound/NotFound";
 import Checkout from "./components/Checkout/Checkout";
 import OrderResult from "./components/OrderResult/OrderResult";
+import Orders from "./containers/Orders/Orders";
 
 const App = () => (
   <Routes>
@@ -21,7 +22,7 @@ const App = () => (
         <Route path="edit/:id" element={<DishesForm />} />
       </Route>
 
-      <Route path="orders" element={null} />
+      <Route path="orders" element={<Orders />} />
     </Route>
 
     <Route path="*" element={<NotFound />} />

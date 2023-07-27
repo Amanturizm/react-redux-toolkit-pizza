@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {fetchAll, fetchOne} from "./AdminThunk";
+import { fetchAll, fetchOne } from "./DishesThunk";
 
 interface State {
   dishes: IDish[];
@@ -11,8 +11,8 @@ const initialState: State = {
   currentDish: null,
 }
 
-const adminSlice = createSlice({
-  name: 'admin',
+const dishesSlice = createSlice({
+  name: 'dishes',
   initialState,
   reducers: {
     clearCurrentDish: (state) => { state.currentDish = null },
@@ -28,5 +28,5 @@ const adminSlice = createSlice({
   }
 });
 
-export const adminReducer = adminSlice.reducer;
-export const { clearCurrentDish } = adminSlice.actions;
+export const dishesReducer = dishesSlice.reducer;
+export const { clearCurrentDish } = dishesSlice.actions;

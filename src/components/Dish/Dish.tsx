@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import DeleteConfirm from "../DeleteConfirm/DeleteConfirm";
 import {useAppDispatch, useAppSelector} from "../../app/hook";
-import {deleteOne, fetchAll} from "../../store/Admin/AdminThunk";
+import {deleteOne, fetchAll} from "../../store/Admin/Dishes/DishesThunk";
 import { addOrRemoveDish} from "../../store/ClientSide/ClientSideSlice";
 
 interface Props {
@@ -40,7 +40,12 @@ const Dish: React.FC<Props> = ({ dish, isAdmin }) => {
     >
       <div className="d-flex align-items-center gap-3">
         <img src={dish.image} alt="dish-img" className="rounded-4" style={{ width: 150, height: 150 }} />
-        <h1 className="overflow-hidden" style={{ maxWidth: isAdmin ? 'none' : 250, textOverflow: 'ellipsis' }}>{dish.title}</h1>
+        <h1
+          className="overflow-hidden"
+          style={{ maxWidth: isAdmin ? 'none' : 250, textOverflow: 'ellipsis' }}
+        >
+          {dish.title}
+        </h1>
       </div>
 
       <div className="d-flex align-items-center gap-3 ms-3">

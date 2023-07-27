@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosApi from "../../axiosApi";
+import axiosApi from "../../../axiosApi";
 
 export const fetchAll = createAsyncThunk<IDish[]>(
   'dishes/fetchAll',

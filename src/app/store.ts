@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { adminReducer } from "../store/Admin/AdminSlice";
+import { dishesReducer } from "../store/Admin/Dishes/DishesSlice";
 import { clientSideReducer } from "../store/ClientSide/ClientSideSlice";
+import {ordersReducer} from "../store/Admin/Orders/OrdersSlice";
 
 export const store = configureStore({
   reducer: {
-    admin: adminReducer,
+    dishes: dishesReducer,
+    orders: ordersReducer,
     clientSide: clientSideReducer,
   }
 });

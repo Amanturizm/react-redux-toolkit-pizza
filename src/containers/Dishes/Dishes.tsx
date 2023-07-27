@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
-import { fetchAll } from "../../store/Admin/AdminThunk";
+import { fetchAll } from "../../store/Admin/Dishes/DishesThunk";
 import Dish from "../../components/Dish/Dish";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 const Dishes: React.FC<Props> = ({ isAdmin }) => {
   const dispatch = useAppDispatch();
-  const { dishes } = useAppSelector(state => state.admin);
+  const { dishes } = useAppSelector(state => state.dishes);
 
   useEffect(() => {
     dispatch(fetchAll());

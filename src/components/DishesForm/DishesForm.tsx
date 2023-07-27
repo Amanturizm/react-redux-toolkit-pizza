@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import FormInput from "../FormInput/FormInput";
 import CloseButton from "../CloseButton/CloseButton";
 import {useAppDispatch, useAppSelector} from "../../app/hook";
-import {createOne, editOne, fetchAll, fetchOne} from "../../store/Admin/AdminThunk";
+import {createOne, editOne, fetchAll, fetchOne} from "../../store/Admin/Dishes/DishesThunk";
 import {useNavigate, useParams} from "react-router-dom";
-import {clearCurrentDish} from "../../store/Admin/AdminSlice";
+import {clearCurrentDish} from "../../store/Admin/Dishes/DishesSlice";
 
 const initialState: TDishApi = {
   title: '',
@@ -14,7 +14,7 @@ const initialState: TDishApi = {
 
 const DishesForm = () => {
   const dispatch = useAppDispatch();
-  const { currentDish } = useAppSelector(state => state.admin);
+  const { currentDish } = useAppSelector(state => state.dishes);
 
   const navigate = useNavigate();
   const { id } = useParams() as { id: string };

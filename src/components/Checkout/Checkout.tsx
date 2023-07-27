@@ -9,7 +9,7 @@ import { clearCart } from "../../store/ClientSide/ClientSideSlice";
 const Checkout = () => {
   const dispatch = useAppDispatch();
 
-  const { dishes } = useAppSelector(state => state.admin);
+  const { dishes } = useAppSelector(state => state.dishes);
   const { cartDishes } = useAppSelector(state => state.clientSide);
 
   const sendOrder = async () => {

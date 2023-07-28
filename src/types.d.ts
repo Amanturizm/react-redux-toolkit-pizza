@@ -20,8 +20,6 @@ interface IOrderDish {
   amount: number;
 }
 
-// type TOrder = IOrderDish[];
-
 interface IOrder {
   id: string;
   dishes: IOrderDish[];

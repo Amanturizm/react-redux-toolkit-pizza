@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {addOrder} from "./ClientSideThunk";
+import { addOrder } from "./ClientSideThunk";
 
 interface State {
   cartDishes: ICartDishes | null;
@@ -28,21 +28,21 @@ const clientSideSlice = createSlice({
     },
     increaseDish: (state, { payload: id }: PayloadAction<string>) => {
       if (state.cartDishes) {
-        state.cartDishes[id] = state.cartDishes[id] + 1;
+        state.cartDishes[id] += 1;
       }
     },
     decreaseDish: (state, { payload: id }: PayloadAction<string>) => {
       if (state.cartDishes) {
         if (state.cartDishes[id] === 0) return;
-        state.cartDishes[id] = state.cartDishes[id] - 1;
+        state.cartDishes[id] -= 1;
       }
     },
     clearCart: (state) => { state.cartDishes = null }
   },
   extraReducers: (builder) => {
-    builder.addCase(addOrder.fulfilled, (state) => {
-      state.addOrderLoading = false;
-    });
+    builder.addCase(addOrder.pending, (state) => {state.addOrderLoading = true});
+    builder.addCase(addOrder.fulfilled, (state) => {state.addOrderLoading = false});
+    builder.addCase(addOrder.rejected, (state) => {state.addOrderLoading = false});
   }
 });
 

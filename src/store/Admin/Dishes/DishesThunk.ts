@@ -14,7 +14,7 @@ export const fetchOne = createAsyncThunk<TDishApi | null, string>(
   async (id) => {
     const { data } = await axiosApi.get<TDishApi | null>(`/dishes/${id}.json`);
 
-    return data ? data : null;
+    return data || null;
   }
 );
 

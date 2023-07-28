@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import DeleteConfirm from "../DeleteConfirm/DeleteConfirm";
+import DeleteConfirm from "../UI/DeleteConfirm/DeleteConfirm";
 import {useAppDispatch, useAppSelector} from "../../app/hook";
 import {deleteOne, fetchAll} from "../../store/Admin/Dishes/DishesThunk";
 import { addOrRemoveDish} from "../../store/ClientSide/ClientSideSlice";

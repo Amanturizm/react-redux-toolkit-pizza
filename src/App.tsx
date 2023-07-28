@@ -4,9 +4,9 @@ import ClientSide from "./containers/ClientSide/ClientSide";
 import Admin from "./containers/Admin/Admin";
 import Dishes from "./containers/Dishes/Dishes";
 import DishesForm from "./components/DishesForm/DishesForm";
-import NotFound from "./components/NotFound/NotFound";
+import NotFound from "./components/UI/NotFound/NotFound";
 import Checkout from "./components/Checkout/Checkout";
-import OrderResult from "./components/OrderResult/OrderResult";
+import OrderResult from "./components/UI/OrderResult/OrderResult";
 import Orders from "./containers/Orders/Orders";
 
 const App = () => (

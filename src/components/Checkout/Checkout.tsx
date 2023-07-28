@@ -1,20 +1,24 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from "../../app/hook";
 import CheckoutContent from "../CheckoutContent/CheckoutContent";
-import CloseButton from "../CloseButton/CloseButton";
-import { Link } from "react-router-dom";
+import CloseButton from "../UI/CloseButton/CloseButton";
+import {Link, useNavigate} from "react-router-dom";
 import { addOrder } from "../../store/ClientSide/ClientSideThunk";
 import { clearCart } from "../../store/ClientSide/ClientSideSlice";
+import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
 
 const Checkout = () => {
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
 
   const { dishes } = useAppSelector(state => state.dishes);
-  const { cartDishes } = useAppSelector(state => state.clientSide);
+  const { cartDishes, addOrderLoading } = useAppSelector(state => state.clientSide);
 
   const sendOrder = async () => {
     await dispatch(addOrder());
     await dispatch(clearCart());
+    navigate('/order-result');
   };
 
   return (
@@ -30,7 +34,13 @@ const Checkout = () => {
 
               <div className="d-flex flex-column gap-2">
                 <Link to="/" className="btn btn-secondary">Cancel</Link>
-                <Link to="/order-result" className="btn btn-warning" onClick={sendOrder}>Order</Link>
+                <button
+                  className="disabled-button btn btn-warning"
+                  onClick={sendOrder}
+                  disabled={addOrderLoading}
+                >
+                  Order{addOrderLoading ? <ButtonSpinner /> : null}
+                </button>
               </div>
             </>
             :

@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { fetchAll } from "../../store/Admin/Dishes/DishesThunk";
 import Dish from "../../components/Dish/Dish";
+import PizzaLoader from "../../components/UI/PizzaLoader/PizzaLoader";
 
 interface Props {
   isAdmin?: boolean;
@@ -10,7 +11,7 @@ interface Props {
 
 const Dishes: React.FC<Props> = ({ isAdmin }) => {
   const dispatch = useAppDispatch();
-  const { dishes } = useAppSelector(state => state.dishes);
+  const { dishes, dishesLoading } = useAppSelector(state => state.dishes);
 
   useEffect(() => {
     dispatch(fetchAll());
@@ -26,13 +27,14 @@ const Dishes: React.FC<Props> = ({ isAdmin }) => {
           </div>
           : null
       }
-
-
-      <div className={"d-flex gap-4 " + ( isAdmin ? "flex-column" : "flex-wrap ms-5" )}>
-        {
-          dishes.map(dish => <Dish dish={dish} key={`dish-${dish.id}`} isAdmin={isAdmin} />)
-        }
-      </div>
+      {
+          dishesLoading ? <PizzaLoader /> :
+            <div className={"d-flex gap-4 " + ( isAdmin ? "flex-column" : "flex-wrap ms-5" )}>
+              {
+                dishes.map(dish => <Dish dish={dish} key={`dish-${dish.id}`} isAdmin={isAdmin} />)
+              }
+            </div>
+      }
 
       <Outlet />
     </div>

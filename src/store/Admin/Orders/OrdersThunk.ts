@@ -7,6 +7,8 @@ export const fetchOrders = createAsyncThunk<IOrder[]>(
     const { data: dishes } = await axiosApi.get<IDishesApi>('/dishes.json');
     const { data: orders } = await axiosApi.get<IOrdersApi>('/orders.json');
 
+    if (!orders) return [];
+
     const formattedDishes: IDish[] = Object.keys(dishes).map(id => ({ ...dishes[id], id }));
     const formattedOrders = Object.keys(orders).map(id => orders[id]);
 
@@ -30,52 +32,9 @@ export const fetchOrders = createAsyncThunk<IOrder[]>(
   }
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const formattedDishes: TOrder[] = Object.keys(dishes)
-//   .map(id => ({ title: dishes[id].title, price: dishes[id].price, id }));
-//
-// const ordersID = Object.keys(orders)
-//   .map(id => ({ ...orders[id] }))
-//   .map(order => Object.keys(order));
-//
-// const ordersAmounts = Object.keys(orders)
-//   .map(id => (Object.values(orders[id])));
-//
-// console.log('ordersAmounts: ', ordersAmounts);
-// console.log('ordersID: ', ordersID);
-//
-// const formattedOrders: any = [];
-//
-// ordersID.forEach((order, index) => {
-//   const lol: any = [];
-//
-//   formattedDishes.forEach((dish, index2) => {
-//     if (order.includes(dish.id)) {
-//       lol.push({ dish, amount: ordersAmounts[index][index2] });
-//     }
-//   });
-//
-//   formattedOrders.push(lol);
-// });
-//
-// console.log('formattedOrders: ', formattedOrders);
+export const deleteOne = createAsyncThunk<void, string>(
+  'orders/deleteOne',
+  async (id) => {
+    await axiosApi.delete(`/orders/${id}.json`);
+  }
+);

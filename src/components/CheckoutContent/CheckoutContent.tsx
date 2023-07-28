@@ -2,7 +2,7 @@ import React from 'react';
 import CheckoutItem from "../CheckoutItem/CheckoutItem";
 import { useAppDispatch } from "../../app/hook";
 import { decreaseDish, increaseDish } from "../../store/ClientSide/ClientSideSlice";
-import {DELIVERY_PRICE} from "../../constants";
+import { DELIVERY_PRICE } from "../../constants";
 
 interface Props {
   cartDishes: ICartDishes;
@@ -12,8 +12,8 @@ interface Props {
 const CheckoutContent: React.FC<Props> = ({ cartDishes, dishes }) => {
   const dispatch = useAppDispatch();
 
-  const cartDishesId = cartDishes ? Object.keys(cartDishes) : [];
-  const dishesId = dishes.map(dish => dish.id);
+  const cartDishesId = cartDishes ? Object.keys(cartDishes) : []; // ['-NaDL5fCkyZnS53wlTfR', '-NaDL5fCkyZnS53wlTfR']
+  const dishesId = dishes.map(dish => dish.id); // ['gbfdhgng', 'gfgsfdfgfdg']
 
   const total: number = dishesId
     .map((id, index) => {

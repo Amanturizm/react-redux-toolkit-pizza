@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import FormInput from "../FormInput/FormInput";
-import CloseButton from "../CloseButton/CloseButton";
-import {useAppDispatch, useAppSelector} from "../../app/hook";
-import {createOne, editOne, fetchAll, fetchOne} from "../../store/Admin/Dishes/DishesThunk";
 import {useNavigate, useParams} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../app/hook";
+import FormInput from "../FormInput/FormInput";
+import CloseButton from "../UI/CloseButton/CloseButton";
+import {createOne, editOne, fetchAll, fetchOne} from "../../store/Admin/Dishes/DishesThunk";
 import {clearCurrentDish} from "../../store/Admin/Dishes/DishesSlice";
+import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
+import Preloader from "../UI/Preloader/Preloader";
 
 const initialState: TDishApi = {
   title: '',
@@ -14,7 +16,11 @@ const initialState: TDishApi = {
 
 const DishesForm = () => {
   const dispatch = useAppDispatch();
-  const { currentDish } = useAppSelector(state => state.dishes);
+  const {
+    currentDish,
+    currentDishLoading,
+    createOrEditDishLoading
+  } = useAppSelector(state => state.dishes);
 
   const navigate = useNavigate();
   const { id } = useParams() as { id: string };
@@ -65,7 +71,18 @@ const DishesForm = () => {
       <FormInput label="Price: " name="price" value={inputsValue.price} changeValue={changeValue} type="number" />
       <FormInput label="Image: " name="image" value={inputsValue.image} changeValue={changeValue} />
 
-      <button className="btn btn-primary mt-3">{id ? 'Edit' : 'Create'}</button>
+      <button
+        className={`disabled-button
+          btn btn-${id ? 'success' : 'primary'} 
+          d-flex justify-content-center align-items-center gap-3
+          mt-3 w-100
+          `}
+        disabled={createOrEditDishLoading}
+      >
+        {id ? 'Edit' : 'Create'}{createOrEditDishLoading ? <ButtonSpinner /> : null}
+      </button>
+
+      {currentDishLoading ? <Preloader /> : null}
     </form>
   );
 };

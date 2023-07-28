@@ -4,11 +4,13 @@ import { addOrder } from "./ClientSideThunk";
 interface State {
   cartDishes: ICartDishes | null;
   addOrderLoading: boolean;
+  errorMessage: string;
 }
 
 const initialState: State = {
   cartDishes: null,
   addOrderLoading: false,
+  errorMessage: ''
 }
 
 const clientSideSlice = createSlice({
@@ -40,9 +42,15 @@ const clientSideSlice = createSlice({
     clearCart: (state) => { state.cartDishes = null }
   },
   extraReducers: (builder) => {
-    builder.addCase(addOrder.pending, (state) => {state.addOrderLoading = true});
-    builder.addCase(addOrder.fulfilled, (state) => {state.addOrderLoading = false});
-    builder.addCase(addOrder.rejected, (state) => {state.addOrderLoading = false});
+    builder.addCase(addOrder.pending, state => {
+      state.addOrderLoading = true;
+      state.errorMessage = '';
+    });
+    builder.addCase(addOrder.fulfilled, state => {state.addOrderLoading = false});
+    builder.addCase(addOrder.rejected, (state, { error: { message } }) => {
+      state.addOrderLoading = false;
+      state.errorMessage = message || '';
+    });
   }
 });
 

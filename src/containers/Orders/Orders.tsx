@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../app/hook";
-import {fetchOrders, deleteOne} from "../../store/Admin/Orders/OrdersThunk";
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { fetchOrders, deleteOne } from "../../store/Admin/Orders/OrdersThunk";
 import Order from "../../components/Order/Order";
 import PizzaLoader from "../../components/UI/PizzaLoader/PizzaLoader";
 import ErrorMessage from "../../components/UI/ErrorMessage/ErrorMessage";

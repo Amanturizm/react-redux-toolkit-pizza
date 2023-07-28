@@ -1,7 +1,7 @@
 import React from 'react';
+import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Dishes from "../Dishes/Dishes";
-import {Outlet} from "react-router-dom";
 
 const ClientSide = () => (
   <>

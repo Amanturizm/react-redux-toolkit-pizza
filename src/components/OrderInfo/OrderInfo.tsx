@@ -1,16 +1,11 @@
 import React from 'react';
-import {useAppDispatch, useAppSelector} from "../../app/hook";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../app/hook";
 import OrderInfoContent from "../OrderInfoContent/OrderInfoContent";
 import CloseButton from "../UI/CloseButton/CloseButton";
-import {Link, useNavigate} from "react-router-dom";
-import { addOrder } from "../../store/ClientSide/ClientSideThunk";
-import { clearCart } from "../../store/ClientSide/ClientSideSlice";
-import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
 
 const OrderInfo = () => {
   const navigate = useNavigate();
-
-  const dispatch = useAppDispatch();
 
   const { dishes } = useAppSelector(state => state.dishes);
   const { cartDishes } = useAppSelector(state => state.clientSide);

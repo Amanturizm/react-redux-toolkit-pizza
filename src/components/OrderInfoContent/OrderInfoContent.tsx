@@ -1,8 +1,8 @@
 import React from 'react';
-import OrderInfoItem from "../OrderInfoItem/OrderInfoItem";
 import { useAppDispatch } from "../../app/hook";
 import { decreaseDish, increaseDish } from "../../store/ClientSide/ClientSideSlice";
 import { DELIVERY_PRICE } from "../../constants";
+import OrderInfoItem from "../OrderInfoItem/OrderInfoItem";
 
 interface Props {
   cartDishes: ICartDishes;

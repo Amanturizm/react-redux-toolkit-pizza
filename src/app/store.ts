@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { dishesReducer } from "../store/Admin/Dishes/DishesSlice";
+import { ordersReducer } from "../store/Admin/Orders/OrdersSlice";
 import { clientSideReducer } from "../store/ClientSide/ClientSideSlice";
-import {ordersReducer} from "../store/Admin/Orders/OrdersSlice";
 
 export const store = configureStore({
   reducer: {

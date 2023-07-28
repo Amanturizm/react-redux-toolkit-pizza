@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useAppSelector } from "../../app/hook";
 import { DELIVERY_PRICE } from "../../constants";
 import OrderDish from "../OrderDish/OrderDish";
-import {useAppSelector} from "../../app/hook";
-import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
 import OrderModalForCustomer from "../UI/OrderModalForCustomer/OrderModalForCustomer";
+import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
 
 interface Props {
   id: string;

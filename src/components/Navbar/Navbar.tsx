@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from "react-router-dom";
-import './Navbar.css';
 import { useAppSelector } from "../../app/hook";
+import './Navbar.css';
 
 interface Props {
   isAdmin?: boolean;

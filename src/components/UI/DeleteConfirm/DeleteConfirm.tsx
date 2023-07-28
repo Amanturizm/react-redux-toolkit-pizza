@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppSelector} from "../../../app/hook";
+import { useAppSelector } from "../../../app/hook";
 import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
 
 interface Props {

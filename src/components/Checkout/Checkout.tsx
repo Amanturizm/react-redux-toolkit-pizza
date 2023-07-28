@@ -1,18 +1,16 @@
-import React, {useState} from 'react';
-import OrderInfoContent from "../OrderInfoContent/OrderInfoContent";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { clearCart } from "../../store/ClientSide/ClientSideSlice";
+import { addOrder } from "../../store/ClientSide/ClientSideThunk";
+import FormInput from "../UI/FormInput/FormInput";
 import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
-import CloseButton from "../UI/CloseButton/CloseButton";
-import FormInput from "../FormInput/FormInput";
-import {addOrder} from "../../store/ClientSide/ClientSideThunk";
-import {clearCart} from "../../store/ClientSide/ClientSideSlice";
-import {useAppDispatch, useAppSelector} from "../../app/hook";
 
 const initialState: ICustomer = {
   name: '',
   address: '',
   phone: ''
-}
+};
 
 const Checkout = () => {
   const navigate = useNavigate();

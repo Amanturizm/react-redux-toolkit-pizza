@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {createOne, deleteOne, editOne, fetchAll, fetchOne} from "./DishesThunk";
+import { createOne, deleteOne, editOne, fetchAll, fetchOne } from "./DishesThunk";
 
 interface State {
   dishes: IDish[];

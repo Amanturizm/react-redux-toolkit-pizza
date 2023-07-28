@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { addOrRemoveDish } from "../../store/ClientSide/ClientSideSlice";
+import { deleteOne, fetchAll } from "../../store/Admin/Dishes/DishesThunk";
 import DeleteConfirm from "../UI/DeleteConfirm/DeleteConfirm";
-import {useAppDispatch, useAppSelector} from "../../app/hook";
-import {deleteOne, fetchAll} from "../../store/Admin/Dishes/DishesThunk";
-import { addOrRemoveDish} from "../../store/ClientSide/ClientSideSlice";
 
 interface Props {
   dish: IDish;
@@ -14,7 +14,7 @@ const DISH_CLASSES = {
   DEFAULT: 'd-flex align-items-center justify-content-between ',
   ADMIN: 'border-top border-5 border-black pe-4 pt-4',
   CLIENT_SIDE: 'position-relative border border-5 border-black rounded-4 p-4 pe-5',
-}
+};
 
 const Dish: React.FC<Props> = ({ dish, isAdmin }) => {
   const dispatch = useAppDispatch();

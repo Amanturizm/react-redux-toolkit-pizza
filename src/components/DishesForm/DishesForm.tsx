@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../app/hook";
-import FormInput from "../FormInput/FormInput";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { clearCurrentDish } from "../../store/Admin/Dishes/DishesSlice";
+import { createOne, editOne, fetchAll, fetchOne } from "../../store/Admin/Dishes/DishesThunk";
+import FormInput from "../UI/FormInput/FormInput";
 import CloseButton from "../UI/CloseButton/CloseButton";
-import {createOne, editOne, fetchAll, fetchOne} from "../../store/Admin/Dishes/DishesThunk";
-import {clearCurrentDish} from "../../store/Admin/Dishes/DishesSlice";
-import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
 import Preloader from "../UI/Preloader/Preloader";
+import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
 
 const initialState: TDishApi = {
   title: '',
   price: '',
   image: ''
-}
+};
 
 const DishesForm = () => {
   const dispatch = useAppDispatch();

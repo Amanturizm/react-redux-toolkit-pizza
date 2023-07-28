@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {deleteOne, fetchOrders} from "./OrdersThunk";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { deleteOne, fetchOrders } from "./OrdersThunk";
 
 interface State {
   orders: IOrderMutation[];

@@ -41,6 +41,11 @@ const Checkout = () => {
     }
   };
 
+  const inputsValueValid: boolean =
+    inputsValue.name.length < 1 ||
+    inputsValue.address.length < 1 ||
+    inputsValue.phone.length < 1;
+
   return (
     <div className="position-fixed top-0 start-0 end-0 bottom-0 bg-black bg-opacity-25">
       <form
@@ -60,7 +65,7 @@ const Checkout = () => {
           <button
             className="disabled-button btn btn-warning"
             onClick={sendOrder}
-            disabled={addOrderLoading}
+            disabled={addOrderLoading || inputsValueValid}
           >
             Order{addOrderLoading ? <ButtonSpinner /> : null}
           </button>

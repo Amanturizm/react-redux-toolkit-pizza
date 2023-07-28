@@ -27,7 +27,7 @@ const NavBar: React.FC<Props> = ({ isAdmin }) => {
             <NavLink to="orders" className="text-white text-nowrap text-decoration-none fs-4">Orders</NavLink>
           </div>
           :
-          <Link to="checkout" className="position-relative">
+          <Link to="order" className="position-relative">
             <img src={CART_IMAGE} style={{width: 45}} alt="cart-img"/>
             {
               cartDishes && Object.keys(cartDishes).length ?

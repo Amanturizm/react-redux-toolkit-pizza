@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../app/hook";
 import { addOrRemoveDish } from "../../store/ClientSide/ClientSideSlice";
 import minus from '../../assets/minus.png';
 import plus from '../../assets/plus.png';
-import './CheckoutItem.css';
+import './OrderInfoItem.css';
 
 interface Props {
   dish: IDish;
@@ -12,7 +12,7 @@ interface Props {
   plusClick: React.MouseEventHandler;
 }
 
-const CheckoutItem: React.FC<Props> = ({ dish: { id, title, price }, amount, minusClick, plusClick }) => {
+const OrderInfoItem: React.FC<Props> = ({ dish: { id, title, price }, amount, minusClick, plusClick }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -50,4 +50,4 @@ const CheckoutItem: React.FC<Props> = ({ dish: { id, title, price }, amount, min
   );
 };
 
-export default CheckoutItem;
+export default OrderInfoItem;

@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckoutItem from "../CheckoutItem/CheckoutItem";
+import OrderInfoItem from "../OrderInfoItem/OrderInfoItem";
 import { useAppDispatch } from "../../app/hook";
 import { decreaseDish, increaseDish } from "../../store/ClientSide/ClientSideSlice";
 import { DELIVERY_PRICE } from "../../constants";
@@ -9,11 +9,11 @@ interface Props {
   dishes: IDish[];
 }
 
-const CheckoutContent: React.FC<Props> = ({ cartDishes, dishes }) => {
+const OrderInfoContent: React.FC<Props> = ({ cartDishes, dishes }) => {
   const dispatch = useAppDispatch();
 
-  const cartDishesId = cartDishes ? Object.keys(cartDishes) : []; // ['-NaDL5fCkyZnS53wlTfR', '-NaDL5fCkyZnS53wlTfR']
-  const dishesId = dishes.map(dish => dish.id); // ['gbfdhgng', 'gfgsfdfgfdg']
+  const cartDishesId = cartDishes ? Object.keys(cartDishes) : [];
+  const dishesId = dishes.map(dish => dish.id);
 
   const total: number = dishesId
     .map((id, index) => {
@@ -35,7 +35,7 @@ const CheckoutContent: React.FC<Props> = ({ cartDishes, dishes }) => {
         {
           cartDishes && Object.keys(cartDishes).length ?
             cartDishesId.map(id => (
-              <CheckoutItem
+              <OrderInfoItem
                 dish={dishes[dishesId.indexOf(id)]}
                 amount={cartDishes[id]}
                 minusClick={() => dispatch(decreaseDish(id))}
@@ -59,4 +59,4 @@ const CheckoutContent: React.FC<Props> = ({ cartDishes, dishes }) => {
   );
 };
 
-export default CheckoutContent;
+export default OrderInfoContent;

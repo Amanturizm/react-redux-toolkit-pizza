@@ -45,14 +45,22 @@ const DishesForm = () => {
   const sendData = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!id) {
-      await dispatch(createOne(inputsValue));
+    if (inputsValue.title.length < 1) {
+      alert('Enter the title');
+    } else if (inputsValue.price === '') {
+      alert('Enter the price');
+    } else if (inputsValue.image.length < 1) {
+      alert('Enter the image url');
     } else {
-      await dispatch(editOne({ id, editDish: inputsValue }));
-    }
+      if (!id) {
+        await dispatch(createOne(inputsValue));
+      } else {
+        await dispatch(editOne({ id, editDish: inputsValue }));
+      }
 
-    await dispatch(fetchAll());
-    navigate('/admin/dishes');
+      await dispatch(fetchAll());
+      navigate('/admin/dishes');
+    }
   };
 
   return (

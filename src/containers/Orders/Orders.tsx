@@ -22,18 +22,22 @@ const Orders = () => {
       <h1>Orders</h1>
       {
         ordersLoading ? <PizzaLoader /> :
-          <div className="d-flex flex-column gap-3">
-            {
-              orders.map(order => (
-                <Order id={order.id} order={order} onClick={() => deleteOrder(order.id)} key={order.id} />
-              ))
-            }
-          </div>
-      }
-      {
-        !orders.length ?
-          <h1 className="position-absolute top-50 start-50 translate-middle">No orders</h1>
-          : null
+          !orders.length ?
+            <h1 className="position-absolute top-50 start-50 translate-middle">No orders</h1>
+            :
+            <div className="d-flex flex-column gap-3">
+              {
+                orders.map(({ customer, order }) => (
+                  <Order
+                    id={order.id}
+                    customer={customer}
+                    order={order}
+                    onClick={() => deleteOrder(order.id)}
+                    key={order.id}
+                  />
+                ))
+              }
+            </div>
       }
     </div>
   );

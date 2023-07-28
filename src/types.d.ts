@@ -15,6 +15,12 @@ interface ICartDishes {
   [id: string]: number;
 }
 
+interface ICustomer {
+  name: string;
+  address: string;
+  phone: string;
+}
+
 interface IOrderDish {
   dish: IDish;
   amount: number;
@@ -25,10 +31,20 @@ interface IOrder {
   dishes: IOrderDish[];
 }
 
+interface IOrderMutation {
+  customer: ICustomer;
+  order: IOrder;
+}
+
 interface IOrderApi {
   [id: string]: number;
 }
 
-interface IOrdersApi {
-  [id: string]: IOrderApi;
+interface IOrderApiMutation {
+  customer: ICustomer;
+  order: IOrderApi;
+}
+
+interface IOrdersApiMutation {
+  [id: string]: IOrderApiMutation;
 }

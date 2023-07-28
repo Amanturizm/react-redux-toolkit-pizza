@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {deleteOne, fetchOrders} from "./OrdersThunk";
 
 interface State {
-  orders: IOrder[];
+  orders: IOrderMutation[];
   ordersLoading: boolean;
   completeButtonLoading: string;
 }
@@ -19,7 +19,7 @@ const ordersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOrders.pending, (state) => {state.ordersLoading = true});
-    builder.addCase(fetchOrders.fulfilled, (state, { payload: orders }: PayloadAction<IOrder[]>) => {
+    builder.addCase(fetchOrders.fulfilled, (state, { payload: orders }: PayloadAction<IOrderMutation[]>) => {
       state.orders = orders;
       state.ordersLoading = false;
     });

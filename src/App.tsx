@@ -5,13 +5,15 @@ import Admin from "./containers/Admin/Admin";
 import Dishes from "./containers/Dishes/Dishes";
 import DishesForm from "./components/DishesForm/DishesForm";
 import NotFound from "./components/UI/NotFound/NotFound";
-import Checkout from "./components/Checkout/Checkout";
 import OrderResult from "./components/UI/OrderResult/OrderResult";
 import Orders from "./containers/Orders/Orders";
+import OrderInfo from "./components/OrderInfo/OrderInfo";
+import Checkout from "./components/Checkout/Checkout";
 
 const App = () => (
   <Routes>
     <Route path="/" element={<ClientSide />}>
+      <Route path="order" element={<OrderInfo />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="order-result" element={<OrderResult />} />
     </Route>

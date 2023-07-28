@@ -1,55 +1,73 @@
-import React from 'react';
-import {useAppDispatch, useAppSelector} from "../../app/hook";
-import CheckoutContent from "../CheckoutContent/CheckoutContent";
-import CloseButton from "../UI/CloseButton/CloseButton";
+import React, {useState} from 'react';
+import OrderInfoContent from "../OrderInfoContent/OrderInfoContent";
 import {Link, useNavigate} from "react-router-dom";
-import { addOrder } from "../../store/ClientSide/ClientSideThunk";
-import { clearCart } from "../../store/ClientSide/ClientSideSlice";
 import ButtonSpinner from "../UI/ButtonSpinner/ButtonSpinner";
+import CloseButton from "../UI/CloseButton/CloseButton";
+import FormInput from "../FormInput/FormInput";
+import {addOrder} from "../../store/ClientSide/ClientSideThunk";
+import {clearCart} from "../../store/ClientSide/ClientSideSlice";
+import {useAppDispatch, useAppSelector} from "../../app/hook";
+
+const initialState: ICustomer = {
+  name: '',
+  address: '',
+  phone: ''
+}
 
 const Checkout = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
+  const { addOrderLoading } = useAppSelector(state => state.clientSide);
 
-  const { dishes } = useAppSelector(state => state.dishes);
-  const { cartDishes, addOrderLoading } = useAppSelector(state => state.clientSide);
+  const [inputsValue, setInputsValue] = useState<ICustomer>(initialState);
 
-  const sendOrder = async () => {
-    await dispatch(addOrder());
-    await dispatch(clearCart());
-    navigate('/order-result');
+  const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputsValue(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const sendOrder = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (inputsValue.name.length < 1) {
+      alert('Enter the name');
+    } else if (inputsValue.address.length < 1) {
+      alert('Enter the address');
+    } else if (inputsValue.phone.length < 1) {
+      alert('Enter the phone number');
+    } else {
+      await dispatch(addOrder(inputsValue));
+      navigate('/order-result');
+      await dispatch(clearCart());
+    }
   };
 
   return (
     <div className="position-fixed top-0 start-0 end-0 bottom-0 bg-black bg-opacity-25">
-      <div
+      <form
         className="position-absolute top-50 start-50 z-1 translate-middle p-4 bg-black rounded-4 text-white"
         style={{ width: 600 }}
       >
-        {
-          cartDishes && Object.keys(cartDishes).length ?
-            <>
-              <CheckoutContent cartDishes={cartDishes} dishes={dishes} />
+        <h1 className="mb-4">Checkout: </h1>
 
-              <div className="d-flex flex-column gap-2">
-                <Link to="/" className="btn btn-secondary">Cancel</Link>
-                <button
-                  className="disabled-button btn btn-warning"
-                  onClick={sendOrder}
-                  disabled={addOrderLoading}
-                >
-                  Order{addOrderLoading ? <ButtonSpinner /> : null}
-                </button>
-              </div>
-            </>
-            :
-            <>
-              <h1 className="text-warning mt-4">Cart is empty</h1>
-              <CloseButton to="/" />
-            </>
-        }
-      </div>
+        <div className="d-flex flex-column gap-2 mb-4">
+          <FormInput label="Name: " name="name" value={inputsValue.name} changeValue={changeValue} />
+          <FormInput label="Address: " name="address" value={inputsValue.address} changeValue={changeValue} />
+          <FormInput label="Phone: " name="phone" value={inputsValue.phone} changeValue={changeValue} />
+        </div>
+
+        <div className="d-flex flex-column gap-2">
+          <Link to="/order" className="btn btn-secondary">Cancel</Link>
+          <button
+            className="disabled-button btn btn-warning"
+            onClick={sendOrder}
+            disabled={addOrderLoading}
+          >
+            Order{addOrderLoading ? <ButtonSpinner /> : null}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

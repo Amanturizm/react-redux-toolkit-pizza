@@ -28,17 +28,9 @@ const Checkout = () => {
   const sendOrder = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (inputsValue.name.length < 1) {
-      alert('Enter the name');
-    } else if (inputsValue.address.length < 1) {
-      alert('Enter the address');
-    } else if (inputsValue.phone.length < 1) {
-      alert('Enter the phone number');
-    } else {
-      await dispatch(addOrder(inputsValue));
-      navigate('/order-result');
-      await dispatch(clearCart());
-    }
+    await dispatch(addOrder(inputsValue));
+    navigate('/order-result');
+    await dispatch(clearCart());
   };
 
   const inputsValueValid: boolean =

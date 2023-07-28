@@ -45,23 +45,20 @@ const DishesForm = () => {
   const sendData = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (inputsValue.title.length < 1) {
-      alert('Enter the title');
-    } else if (inputsValue.price === '') {
-      alert('Enter the price');
-    } else if (inputsValue.image.length < 1) {
-      alert('Enter the image url');
+    if (!id) {
+      await dispatch(createOne(inputsValue));
     } else {
-      if (!id) {
-        await dispatch(createOne(inputsValue));
-      } else {
-        await dispatch(editOne({ id, editDish: inputsValue }));
-      }
-
-      await dispatch(fetchAll());
-      navigate('/admin/dishes');
+      await dispatch(editOne({ id, editDish: inputsValue }));
     }
+
+    await dispatch(fetchAll());
+    navigate('/admin/dishes');
   };
+
+  const inputsValueValid: boolean =
+    inputsValue.title.length < 1 ||
+    inputsValue.price === '' ||
+    inputsValue.image.length < 1;
 
   return (
     <form
@@ -85,7 +82,7 @@ const DishesForm = () => {
           d-flex justify-content-center align-items-center gap-3
           mt-3 w-100
           `}
-        disabled={createOrEditDishLoading}
+        disabled={createOrEditDishLoading || inputsValueValid}
       >
         {id ? 'Edit' : 'Create'}{createOrEditDishLoading ? <ButtonSpinner /> : null}
       </button>
